@@ -84,13 +84,13 @@ namespace MagicVilla_VillaAPI.Controllers
 		{
 			try
 			{
-				if (await _dbVilla.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
+				if (createDTO == null)
 				{
 					_response.IsSuccess = false;
 					_response.StatusCode = HttpStatusCode.BadRequest;
 					return BadRequest(_response);
 				}
-				if (createDTO == null)
+				if (await _dbVilla.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
 				{
 					_response.IsSuccess = false;
 					_response.StatusCode = HttpStatusCode.BadRequest;
@@ -125,8 +125,6 @@ namespace MagicVilla_VillaAPI.Controllers
 			{
 				if (id == 0)
 				{
-
-
 					_response.IsSuccess = false;
 					_response.StatusCode = HttpStatusCode.BadRequest;
 					return BadRequest(_response);
